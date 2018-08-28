@@ -8,26 +8,25 @@ together in a completely non-blocking manner:
 
 * [Flask](http://flask.pocoo.org/), for the web application framework;
 * [SQLAlchemy](http://www.sqlalchemy.org/), for the object relational mapper (via [Flask-SQLAlchemy](https://github.com/mitsuhiko/flask-sqlalchemy));
-* [Postgresql](http://www.postgresql.org/), for the database;
-* [Psycopg2](http://initd.org/psycopg/), for the SQLAlchemy-Postgresql adapter;
+* [MySql](https://www.mysql.com/), for the database;
+* [PyMySql](https://pymysql.readthedocs.io/en/latest/), for the db driver;
 * [Gunicorn](http://gunicorn.org/), for the WSGI server; and,
 * [Gevent](http://www.gevent.org/), for the networking library.
 
 The file `server.py` defines a small Flask application that has
 two routes: one that triggers a `time.sleep(5)` in Python and one that
-triggers a `pg_sleep(5)` in Postgres.  Both of these sleeps are normally
+triggers a `sleep(5)` in Postgres.  Both of these sleeps are normally
 blocking operations.  By running the server using the Gevent
 worker for Gunicorn, we can make the Python sleep non-blocking.
-By configuring Psycopg2's co-routine support (via
-[psycogreen](https://bitbucket.org/dvarrazzo/psycogreen)) we 
-can make the Postgres sleep non-blocking.
+By using gevent's patching we 
+can make the db sleep non-blocking.
 
 
 ## Installation
 
 Clone the repo:
 
-	git clone https://github.com/kljensen/async-flask-sqlalchemy-example.git
+	git clone https://github.com/jaketaylorpro/async-flask-sqlalchemy-mysql-example.git
 
 Install the requirements
 

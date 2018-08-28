@@ -2,6 +2,7 @@ import sys
 import gevent
 import time
 from gevent import monkey
+
 monkey.patch_all()
 import urllib2
 
@@ -40,6 +41,10 @@ if __name__ == '__main__':
         num_requests = int(sys.argv[1])
     except IndexError:
         num_requests = 5
+
+    t = time_fetch_urls("http://localhost:8000/create_data/", 1)
+    print("-----------------------------------------")
+    print("created data in %.2fs" % t)
 
     # Fetch the URL that blocks with a `time.sleep`
     t0 = time_fetch_urls("http://localhost:8000/sleep/python/", num_requests)
